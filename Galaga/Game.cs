@@ -1,24 +1,29 @@
+using System.IO;
+using DIKUArcade.Entities;
+using DIKUArcade.Graphics;
+using DIKUArcade.Math;
 using DIKUArcade;
 using DIKUArcade.GUI;
-using DIKUArcade.Input;
-using DIKUArcade.Events;
 
 namespace Galaga;
-public class Game : DIKUGame, IGameEventProcessor {
+public class Game : DIKUGame {
+    private Player player;
+
     public Game(WindowArgs windowArgs) : base(windowArgs) {
-        // TODO: Set key event handler (inherited window field of DIKUGame class)
-
+        player = new Player(
+            new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f)),
+            new Image(Path.Combine("Assets", "Images", "Player.png")));
+    }
+    
+    public override void Render() {
+        player.Render();
+    }
+    
+    public override void Update() {
+        window.PollEvents();
     }
 
-
-    public override void Render(){
-        throw new System.NotImplementedException("Galaga game has nothing to render yet.");
-    }
-
-    public override void Update(){
-        throw new System.NotImplementedException("Galaga game has no entities to update yet.");
-    }
-
+/*
     private void KeyPress(KeyboardKey key) {
         // TODO: Close window if escape is pressed
         // TODO: switch on key string and set the player's move direction
@@ -35,4 +40,5 @@ public class Game : DIKUGame, IGameEventProcessor {
     public void ProcessEvent(GameEvent gameEvent) {
         // Leave this empty for now
     }
+*/
 }
