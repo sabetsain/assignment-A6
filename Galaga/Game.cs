@@ -69,6 +69,14 @@ public class Game : DIKUGame, IGameEventProcessor {
     }
 
     private void KeyHandler(KeyboardAction action, KeyboardKey key) {
+        switch (action) {
+            case KeyboardAction.KeyRelease:
+                KeyRelease(key);
+                break;
+            case KeyboardAction.KeyPress:
+                KeyPress(key);
+                break;
+        }
         // TODO: Switch on KeyBoardAction and call proper method
         }
 
