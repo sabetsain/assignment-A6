@@ -6,17 +6,13 @@ public class Player {
     private Entity entity;
     private DynamicShape shape;
 
-// Ask about if these should be fields and then intialized in constructor, or if this is ok
-    private float moveRight;
-    private float moveLeft;
-    private float MOVEMENT_SPEED;
+    private float moveRight = 0.0f;
+    private float moveLeft = 0.0f;
+    private float MOVEMENT_SPEED = 0.01f;
 
     public Player(DynamicShape shape, IBaseImage image) {
     entity = new Entity(shape, image);
     this.shape = shape;
-    this.moveRight = 0.0f;
-    this.moveLeft = 0.0f;
-    this.MOVEMENT_SPEED = 0.01f;
     }
     
     private void UpdateDirection() {
@@ -28,7 +24,7 @@ public class Player {
     }
 
     public void Move() {
-        if (0.0f < shape.Position.X && shape.Position.X < 500.0f) {
+        if (0.0f < shape.Position.X && shape.Position.X < 1.0f) {
             shape.Move();
         }
         // TODO: move the shape and guard against the window borders
