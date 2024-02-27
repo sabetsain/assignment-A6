@@ -24,9 +24,12 @@ public class Player {
     }
 
     public void Move() {
-        if (0.0f < shape.Position.X && shape.Position.X < 1.0f) {
-            shape.Move();
+        if (0.0f > shape.Position.X) {
+            shape.Position.X = 0.0f;
+        } else if (shape.Position.X > 1.0f - shape.Extent.X) {
+            shape.Position.X = 1.0f - shape.Extent.X;
         }
+        shape.Move();
         // TODO: move the shape and guard against the window borders
     }
 
