@@ -74,6 +74,12 @@ public class Game : DIKUGame, IGameEventProcessor {
             case KeyboardKey.Left:
                 player.SetMoveLeft(true);
                 break;
+            case KeyboardKey.Up:
+                player.SetMoveUp(true);
+                break;
+            case KeyboardKey.Down:
+                player.SetMoveDown(true);
+                break;
         }
     }
 
@@ -85,9 +91,15 @@ public class Game : DIKUGame, IGameEventProcessor {
             case KeyboardKey.Left:
                 player.SetMoveLeft(false);
                 break;
+            case KeyboardKey.Up:
+                player.SetMoveUp(false);
+                break;
+            case KeyboardKey.Down:
+                player.SetMoveDown(false);
+                break;
             case KeyboardKey.Space:
                 Vec2F shotPosition = new Vec2F(
-                    player.GetPosition().X + 0.047f, player.GetPosition().Y + 0.081f
+                    player.GetPosition().X + 0.047f, player.GetPosition().Y
                 ); 
                 PlayerShot newShot = new PlayerShot(shotPosition, playerShotImage);
                 playerShots.AddEntity(newShot);

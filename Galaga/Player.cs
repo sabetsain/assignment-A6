@@ -10,6 +10,8 @@ public class Player {
 
     private float moveRight = 0.0f;
     private float moveLeft = 0.0f;
+    private float moveUp = 0.0f;
+    private float moveDown = 0.0f;
     private float MOVEMENT_SPEED = 0.01f;
 
     public Player(DynamicShape shape, IBaseImage image) {
@@ -17,8 +19,9 @@ public class Player {
     this.shape = shape;
     }
     
-    private void UpdateDirection() { 
+    private void UpdateDirection() {
         shape.Direction.X = moveLeft + moveRight;
+        shape.Direction.Y = moveUp + moveDown;
     }
 
     public void Render() {
@@ -30,9 +33,11 @@ public class Player {
             shape.Position.X = 0.0f;
         } else if (shape.Position.X > 1.0f - shape.Extent.X) {
             shape.Position.X = 1.0f - shape.Extent.X;
-        }
-        shape.Move();
-        // TODO: move the shape and guard against the window borders
+        } else if (shape.Position.Y < 0.0f) {
+            shape.Position.Y = 0.0f;
+        } else if (shape.Position.Y > 1.0f - shape.Extent.Y) {
+            shape.Position.Y = 1.0f - shape.Extent.Y;
+        } shape.Move();
     }
 
     public void SetMoveLeft(bool val) {
@@ -51,6 +56,22 @@ public class Player {
             moveRight = 0.0f;
         } UpdateDirection();
         // TODO:set moveRight appropriately and call UpdateDirection()
+    }
+
+    public void SetMoveUp (bool val) {
+        if (val) {
+            moveUp += MOVEMENT_SPEED;
+        } else {
+            moveUp = 0.0f;
+        } UpdateDirection();
+    }
+
+    public void SetMoveDown (bool val) {
+        if (val) {
+            moveDown -= MOVEMENT_SPEED;
+        } else {
+            moveDown = 0.0f;
+        } UpdateDirection();
     }
 
     public Vec2F GetPosition() {
