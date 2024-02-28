@@ -1,5 +1,7 @@
 using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
+using DIKUArcade.Math;
+
 
 namespace Galaga;
 public class Player {    
@@ -15,7 +17,7 @@ public class Player {
     this.shape = shape;
     }
     
-    private void UpdateDirection() {
+    private void UpdateDirection() { 
         shape.Direction.X = moveLeft + moveRight;
     }
 
@@ -24,7 +26,7 @@ public class Player {
     }
 
     public void Move() {
-        if (0.0f > shape.Position.X) {
+        if (0.0f > shape.Position.X) { 
             shape.Position.X = 0.0f;
         } else if (shape.Position.X > 1.0f - shape.Extent.X) {
             shape.Position.X = 1.0f - shape.Extent.X;
@@ -49,6 +51,10 @@ public class Player {
             moveRight = 0.0f;
         } UpdateDirection();
         // TODO:set moveRight appropriately and call UpdateDirection()
+    }
+
+    public Vec2F GetPosition() {
+        return shape.Position;
     }
 
 }
