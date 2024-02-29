@@ -7,9 +7,9 @@ using DIKUArcade.Math;
 
 namespace GalagaTests; 
 public class TestsPlayer {
-    private Player player; 
-    private DynamicShape shape; 
-    private IBaseImage image; 
+    private Player? player; 
+    private DynamicShape? shape; 
+    private IBaseImage? image; 
 
     [SetUp]
     public void Setup() {
@@ -60,13 +60,13 @@ public class TestsPlayer {
         player.SetMoveDown(true);
         
         // Assert
-        Assert.AreEqual(-0.01f, player.moveDown);
-        
+        Assert.AreEqual(-0.01f, player. shape.Direction.Y);
+
         // Act
         player.SetMoveDown(false);
         
         // Assert
-        Assert.AreEqual(0.0f, player.moveDown);
+        Assert.AreEqual(0.0f, player.shape.Direction.Y);
     }
 
     [Test]
