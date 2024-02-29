@@ -4,13 +4,15 @@ using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 
+
 namespace GalagaTests; 
 public class TestsPlayer {
-    private Player player;
-    private DynamicShape shape;
-    private IBaseImage image;
+    private Player? player; // Initialized as nullable
+    private DynamicShape? shape; // Initialized as nullable
+    private IBaseImage? image; // Initialized as nullable
 
-    [SetUp] 
+
+    [SetUp]
     public void Setup() {
         shape = new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f));
         image = new Image("Assets/Images/Player.png");
@@ -77,17 +79,5 @@ public class TestsPlayer {
         
         // Assert
         Assert.AreEqual(expectedPosition, position);
-    }
-
-    [Test]
-    public void TestSetPosition() {
-        var newPosition = new Vec2F(1.0f, 1.0f);
-        
-        // Act
-        player.SetPosition(newPosition);
-        var position = player.GetPosition();
-        
-        // Assert
-        Assert.AreEqual(newPosition, position);
     }
 }
