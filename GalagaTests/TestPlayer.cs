@@ -7,10 +7,9 @@ using DIKUArcade.Math;
 
 namespace GalagaTests; 
 public class TestsPlayer {
-    private Player? player; // Initialized as nullable
-    private DynamicShape? shape; // Initialized as nullable
-    private IBaseImage? image; // Initialized as nullable
-
+    private Player player; 
+    private DynamicShape shape; 
+    private IBaseImage image; 
 
     [SetUp]
     public void Setup() {
