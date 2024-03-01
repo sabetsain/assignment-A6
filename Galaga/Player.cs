@@ -19,9 +19,30 @@ public class Player {
     this.shape = shape;
     }
     
+    public DynamicShape Shape {
+        get { return shape; }
+        set { shape = value; }
+    }
+
+    public float MoveRight {
+        get { return moveRight; }
+    }
+
+    public float MoveLeft {
+        get { return moveLeft; }
+    }
+
+    public float MoveUp {
+        get { return moveUp; }
+    }
+
+    public float MoveDown {
+        get { return moveDown; }
+    }
+    
     private void UpdateDirection() {
         shape.Direction.X = moveLeft + moveRight;
-        shape.Direction.Y = moveUp + moveDown;
+        shape.Direction.Y = moveDown + moveUp;
     }
 
     public void Render() {
@@ -37,7 +58,8 @@ public class Player {
             shape.Position.Y = 0.0f;
         } else if (shape.Position.Y > 1.0f - shape.Extent.Y) {
             shape.Position.Y = 1.0f - shape.Extent.Y;
-        } shape.Move();
+        } 
+        shape.Move();
     }
 
     public void SetMoveLeft(bool val) {
@@ -77,5 +99,4 @@ public class Player {
     public Vec2F GetPosition() {
         return shape.Position;
     }
-
 }
