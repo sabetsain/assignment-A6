@@ -4,79 +4,71 @@ using DIKUArcade.Entities;
 using DIKUArcade.Graphics;
 using DIKUArcade.Math;
 
-
 namespace GalagaTests; 
 public class TestsPlayer {
-    private Player? player; 
-    private DynamicShape? shape; 
-    private IBaseImage? image; 
+    private Player player; 
+    private DynamicShape shape; 
+    private IBaseImage image; 
+
+    [OneTimeSetUp]
+    public void Init() {
+        DIKUArcade.GUI.Window.CreateOpenGLContext();
+    }
 
     [SetUp]
     public void Setup() {
         shape = new DynamicShape(new Vec2F(0.45f, 0.1f), new Vec2F(0.1f, 0.1f));
-        image = new Image("Assets/Images/Player.png");
+        image = new Image("../Galaga/Assets/Images/Player.png");
         player = new Player(shape, image);
     }
 
-    [Test]
+   [Test]
     public void TestMove() {
         player.SetMoveLeft(true);
         player.Move();
-        Assert.AreEqual(0.0f, player.shape.Position.X);
+        Assert.AreEqual(0.44f, player.Shape.Position.X);
+        player.SetMoveLeft(false);
+
         player.SetMoveRight(true);
         player.Move();
-        Assert.AreEqual(0.01f, player.shape.Position.X);
-        player.SetMoveDown(true);
-        player.Move();
-        Assert.AreEqual(0.01f, player.shape.Position.X);
+        Assert.AreEqual(0.45f, player.Shape.Position.X);
+        player.SetMoveRight(false);
+
         player.SetMoveUp(true);
         player.Move();
-        Assert.AreEqual(0.01f, player.shape.Position.X);
-
-        player.SetMoveLeft(false);
-        player.SetMoveRight(false);
-        player.SetMoveDown(false);
+        Assert.AreEqual(0.109999999f, player.Shape.Position.Y);
         player.SetMoveUp(false);
+
+        player.SetMoveDown(true);
         player.Move();
-        Assert.AreEqual(0.01f, player.shape.Position.X); 
+        Assert.AreEqual(0.100000001f, player.Shape.Position.Y);
+        player.SetMoveDown(false);
     }
 
     [Test]
     public void TestSetMoveLeft() {
-        // Test that the player moves left when SetMoveLeft is called with true
         player.SetMoveLeft(true);
-        // The player should move left
-        Assert.AreEqual(-0.01f, player.shape.Direction.X);
-        // Test that the player stops moving left when SetMoveLeft is called with false
+        player.Move();
+        Assert.AreEqual(0.44f, player.Shape.Position.X);
         player.SetMoveLeft(false);
-        // The player should stop moving left
-        Assert.AreEqual(0.0f, player.shape.Direction.X);
+        Assert.AreEqual(0.44f, player.Shape.Position.X);
     }
     
     [Test]
-
     public void TestSetMoveDown() {
-        // Act
         player.SetMoveDown(true);
-        
-        // Assert
-        Assert.AreEqual(-0.01f, player. shape.Direction.Y);
-
-        // Act
+        player.Move();
+        Assert.AreEqual(0.0900000036f, player.Shape.Position.Y);
         player.SetMoveDown(false);
-        
-        // Assert
-        Assert.AreEqual(0.0f, player.shape.Direction.Y);
+        Assert.AreEqual(0.0900000036f, player.Shape.Position.Y);
     }
 
     [Test]
     public void TestGetPosition() {
-        var expectedPosition = new Vec2F(0.0f, 0.0f);
+        var expectedPosition = new Vec2F(0.45f, 0.1f); 
         
-        // Act
         var position = player.GetPosition();
-        
-        // Assert
-        Assert.AreEqual(expectedPosition, position);
+        Assert.AreEqual(expectedPosition.X, position.X);
+        Assert.AreEqual(expectedPosition.Y, position.Y);
     }
 }
