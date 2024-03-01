@@ -68,7 +68,6 @@ public class Player {
         } else {
             moveLeft = 0.0f;
         } UpdateDirection();
-        // TODO:set moveLeft appropriately and call UpdateDirection()
     }
 
     public void SetMoveRight(bool val) {
@@ -77,7 +76,6 @@ public class Player {
         } else {
             moveRight = 0.0f;
         } UpdateDirection();
-        // TODO:set moveRight appropriately and call UpdateDirection()
     }
 
     public void SetMoveUp (bool val) {

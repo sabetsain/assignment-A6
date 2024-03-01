@@ -53,6 +53,30 @@ public class TestsPlayer {
         player.SetMoveLeft(false);
         Assert.AreEqual(0.44f, player.Shape.Position.X);
     }
+
+    [Test]
+    public void TestSetMoveRight() {
+        var expectedPosition = 0.46f;
+        var tolerance = 0.001f;
+        player.SetMoveRight(true);
+        player.Move();
+        var positionAferMove = player.Shape.Position.X;
+        Assert.AreEqual(expectedPosition, positionAferMove, tolerance);
+        player.SetMoveRight(false);
+        Assert.AreEqual(expectedPosition, player.Shape.Position.X, tolerance);
+    }
+
+    [Test]
+    public void TestSetMoveUp() {
+        var tolerance = 0.001f;
+        var expectedPosition = 0.11f;
+        player.SetMoveUp(true);
+        player.Move();
+        var positionAferMove = player.Shape.Position.Y;
+        Assert.AreEqual(expectedPosition, positionAferMove, tolerance);
+        player.SetMoveUp(false);
+        Assert.AreEqual(expectedPosition, positionAferMove, tolerance);
+    }
     
     [Test]
     public void TestSetMoveDown() {
