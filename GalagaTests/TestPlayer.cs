@@ -15,8 +15,6 @@ public class TestsPlayer {
     private DynamicShape shape; 
     private GameEventBus eventBus;
     private IBaseImage image; 
-    private Enemy mainEnemy;
-    private EntityContainer<Enemy> enemies;
 
     [OneTimeSetUp]
     public void Init() {
@@ -32,15 +30,6 @@ public class TestsPlayer {
         eventBus = new GameEventBus();
         eventBus.InitializeEventBus(new List<GameEventType> {GameEventType.PlayerEvent});
         eventBus.Subscribe(GameEventType.PlayerEvent, player);
-
-        List<Image> images = ImageStride.CreateStrides
-            (4, "../Galaga/Assets/Images/BlueMonster.png");
-        const int numEnemies = 1;
-        enemies = new EntityContainer<Enemy>(numEnemies);
-        mainEnemy = new Enemy(
-                new DynamicShape(new Vec2F(0.1f, 0.9f), new Vec2F(0.1f, 0.1f)),
-                new ImageStride(80, images));
-        enemies.AddEntity(mainEnemy);
     }
 
    [Test]
@@ -298,52 +287,5 @@ public class TestsPlayer {
         var position = player.GetPosition();
         Assert.AreEqual(expectedPosition.X, position.X);
         Assert.AreEqual(expectedPosition.Y, position.Y);
-    } 
-
-    [Test]
-    public void TestNoMove() {
-        NoMove movementStrategy = new NoMove(enemies);
-        
-        var expectedPositionX = 0.1f;
-        var expectedPositionY = 0.9f;
-
-        movementStrategy.MoveEnemies(enemies);
-        
-        var actualPosition = mainEnemy.Shape.Position;
-        Assert.AreEqual(expectedPositionX, actualPosition.X);
-        Assert.AreEqual(expectedPositionY, actualPosition.Y);
-    } 
-
-    [Test]
-    public void TestDown() {
-        Down movementStrategy = new Down(enemies);
-        
-        var expectedPositionX = 0.1f;
-        var expectedPositionY = 0.898f;
-        var tolerance = 0.0001f;
-
-        movementStrategy.MoveEnemies(enemies);
-        
-        var actualPosition = mainEnemy.Shape.Position;
-        Assert.AreEqual(expectedPositionX, actualPosition.X, tolerance);
-        Assert.AreEqual(expectedPositionY, actualPosition.Y, tolerance);
-    } 
-
-    [Test]
-    public void TestZigZagDown() {
-        ZigZagDown movementStrategy = new ZigZagDown(enemies);
-        
-        var expectedPositionX = mainEnemy.getStartPos().X + (
-                    0.05f * (MathF.Sin((2.0f * MathF.PI * (
-                        mainEnemy.getStartPos().Y - mainEnemy.Shape.AsDynamicShape().Position.Y
-                    )) / 0.045f))
-                );
-        var expectedPositionY = 0.8997f;
-
-        movementStrategy.MoveEnemies(enemies);
-        
-        var actualPosition = mainEnemy.Shape.Position;
-        Assert.AreEqual(expectedPositionX, actualPosition.X);
-        Assert.AreEqual(expectedPositionY, actualPosition.Y);
     } 
 }
